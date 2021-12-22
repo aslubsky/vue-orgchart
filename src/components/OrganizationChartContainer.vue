@@ -1,6 +1,7 @@
 <template>
   <div v-bind="{ scopedSlots: $scopedSlots }"
        class="orgchart-container"
+       ref="main"
        @wheel="zoom && zoomHandler($event)"
        @mouseup="pan && panning && panEndHandler($event)"
   >
@@ -10,7 +11,8 @@
         @mousedown="pan && panStartHandler($event)"
         @mousemove="pan && panning && panHandler($event)"
     >
-      <organization-chart-node :datasource="datasource" :collapsed-list="collapsedList" :handle-click="handleClick" :handle-expand="handleExpand">
+      <organization-chart-node :datasource="datasource" :expanded-list="expandedList" :handle-click="handleClick"
+                               :handle-expand="handleExpand">
         <template v-for="slot in Object.keys($scopedSlots)" :slot="slot" slot-scope="scope">
           <slot :name="slot" v-bind="scope"/>
         </template>
@@ -55,8 +57,8 @@ export default {
       panning: false,
       startX: 0,
       startY: 0,
-      collapsedList: {},
-      transformVal: ''
+      transformVal: '',
+      expandedList: {}
     }
   },
   components: {
@@ -65,7 +67,7 @@ export default {
   methods: {
     handleExpand(nodeData) {
       this.$emit('node-expand', nodeData);
-      this.$set(this.collapsedList, nodeData.Id+'', !this.collapsedList[nodeData.Id+'']);
+      this.$set(this.expandedList, nodeData.Id + '', !this.expandedList[nodeData.Id + '']);
     },
     handleClick(nodeData) {
       this.$emit('node-click', nodeData);
@@ -161,8 +163,12 @@ export default {
     zoomHandler(e) {
       let newScale = 1 + (e.deltaY > 0 ? -0.2 : 0.2)
       this.setChartScale(newScale)
-    },
-    created: () => {
+    }
+  },
+  mounted() {
+    const offset = ($('.orgchart', this.$refs.main).width() - $(this.$refs.main).width()) / 2;
+    if(offset > 0) {
+      $(".orgchart-container").scrollLeft(offset);
     }
   }
 };

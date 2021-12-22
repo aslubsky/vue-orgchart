@@ -11993,12 +11993,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"545da000-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/OrganizationChartContainer.vue?vue&type=template&id=871a5536&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',_vm._b({staticClass:"orgchart-container",on:{"wheel":function($event){_vm.zoom && _vm.zoomHandler($event)},"mouseup":function($event){_vm.pan && _vm.panning && _vm.panEndHandler($event)}}},'div',{ scopedSlots: _vm.$scopedSlots },false),[_c('div',{staticClass:"orgchart",style:({ transform: _vm.transformVal, cursor: _vm.cursorVal }),on:{"mousedown":function($event){_vm.pan && _vm.panStartHandler($event)},"mousemove":function($event){_vm.pan && _vm.panning && _vm.panHandler($event)}}},[_c('organization-chart-node',{attrs:{"datasource":_vm.datasource,"collapsed-list":_vm.collapsedList,"handle-click":_vm.handleClick,"handle-expand":_vm.handleExpand},scopedSlots:_vm._u([_vm._l((Object.keys(_vm.$scopedSlots)),function(slot){return {key:slot,fn:function(scope){return [_vm._t(slot,null,null,scope)]}}})])})],1)])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"545da000-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/OrganizationChartContainer.vue?vue&type=template&id=52174007&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',_vm._b({ref:"main",staticClass:"orgchart-container",on:{"wheel":function($event){_vm.zoom && _vm.zoomHandler($event)},"mouseup":function($event){_vm.pan && _vm.panning && _vm.panEndHandler($event)}}},'div',{ scopedSlots: _vm.$scopedSlots },false),[_c('div',{staticClass:"orgchart",style:({ transform: _vm.transformVal, cursor: _vm.cursorVal }),on:{"mousedown":function($event){_vm.pan && _vm.panStartHandler($event)},"mousemove":function($event){_vm.pan && _vm.panning && _vm.panHandler($event)}}},[_c('organization-chart-node',{attrs:{"datasource":_vm.datasource,"expanded-list":_vm.expandedList,"handle-click":_vm.handleClick,"handle-expand":_vm.handleExpand},scopedSlots:_vm._u([_vm._l((Object.keys(_vm.$scopedSlots)),function(slot){return {key:slot,fn:function(scope){return [_vm._t(slot,null,null,scope)]}}})])})],1)])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/OrganizationChartContainer.vue?vue&type=template&id=871a5536&
+// CONCATENATED MODULE: ./src/components/OrganizationChartContainer.vue?vue&type=template&id=52174007&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
 var es6_regexp_split = __webpack_require__("28a5");
@@ -12010,14 +12010,17 @@ var es6_number_constructor = __webpack_require__("c5f6");
 var jquery = __webpack_require__("1157");
 var jquery_default = /*#__PURE__*/__webpack_require__.n(jquery);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"545da000-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/OrganizationChartNode.vue?vue&type=template&id=ae26f82a&
-var OrganizationChartNodevue_type_template_id_ae26f82a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('table',[_c('tbody',[_c('tr',[_c('td',{attrs:{"colspan":_vm.datasource.children && _vm.datasource.children.length ? _vm.datasource.children.length*2 : null}},[(_vm.datasource.children && _vm.datasource.children.length)?_c('div',{on:{"click":function($event){$event.stopPropagation();_vm.handleExpand(_vm.datasource)}}},[_vm._t("expand",[_vm._v("\n          pls\n        ")])],2):_vm._e(),_c('div',{staticClass:"node",attrs:{"id":_vm.datasource.id},on:{"click":function($event){$event.stopPropagation();_vm.handleClick(_vm.datasource)}}},[_vm._t("default",[_c('div',{staticClass:"title"},[_c('i',{staticClass:"fa fa-users symbol"}),_vm._v("\n            "+_vm._s(_vm.datasource.name)+"\n          ")]),_c('div',{staticClass:"content"},[_vm._v(_vm._s(_vm.datasource.title))])],{nodeData:_vm.datasource})],2)])]),(_vm.datasource.children && _vm.datasource.children.length)?[_c('tr',{staticClass:"lines",class:{'hidden': _vm.collapsedList[_vm.datasource.Id]}},[_c('td',{attrs:{"colspan":_vm.datasource.children.length*2}},[_c('div',{staticClass:"downLine"})])]),_c('tr',{staticClass:"lines",class:{'hidden': _vm.collapsedList[_vm.datasource.Id]}},[_c('td',{staticClass:"rightLine"}),_vm._l(((_vm.datasource.children.length-1)),function(n){return [_c('td',{staticClass:"leftLine topLine"}),_c('td',{staticClass:"rightLine topLine"})]}),_c('td',{staticClass:"leftLine"})],2),_c('tr',{staticClass:"nodes",class:{'hidden': _vm.collapsedList[_vm.datasource.Id]}},_vm._l((_vm.datasource.children),function(child){return _c('td',{key:child.id,attrs:{"colspan":"2"}},[_c('node',{attrs:{"datasource":child,"collapsed-list":_vm.collapsedList,"handle-click":_vm.handleClick,"handle-expand":_vm.handleExpand},scopedSlots:_vm._u([_vm._l((Object.keys(_vm.$scopedSlots)),function(slot){return {key:slot,fn:function(scope){return [_vm._t(slot,null,null,scope)]}}})])})],1)}))]:_vm._e()],2)])}
-var OrganizationChartNodevue_type_template_id_ae26f82a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"545da000-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/OrganizationChartNode.vue?vue&type=template&id=3e7a788e&
+var OrganizationChartNodevue_type_template_id_3e7a788e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('table',[_c('tbody',[_c('tr',[_c('td',{attrs:{"colspan":_vm.datasource.children && _vm.datasource.children.length ? _vm.datasource.children.length*2 : null}},[(_vm.datasource.children && _vm.datasource.children.length && _vm.datasource.Level > 0)?_c('div',{on:{"click":function($event){$event.stopPropagation();_vm.handleExpand(_vm.datasource)}}},[_vm._t("expand",[_vm._v("\n          pls\n        ")],{expanded:_vm.expanded})],2):_vm._e(),_c('div',{class:( _obj = {'node':true}, _obj['node-level-'+_vm.datasource.Level] = true, _obj ),attrs:{"id":_vm.datasource.id},on:{"click":function($event){$event.stopPropagation();_vm.handleClick(_vm.datasource)}}},[_vm._t("default",[_c('div',{staticClass:"title"},[_c('i',{staticClass:"fa fa-users symbol"}),_vm._v("\n            "+_vm._s(_vm.datasource.name)+"\n          ")]),_c('div',{staticClass:"content"},[_vm._v(_vm._s(_vm.datasource.title))])],{nodeData:_vm.datasource})],2)])]),(_vm.datasource.children && _vm.datasource.children.length)?[_c('tr',{staticClass:"lines",class:{'hidden': !_vm.expanded}},[_c('td',{attrs:{"colspan":_vm.datasource.children.length*2}},[_c('div',{staticClass:"downLine"})])]),_c('tr',{staticClass:"lines",class:{'hidden': !_vm.expanded}},[_c('td',{staticClass:"rightLine"}),_vm._l(((_vm.datasource.children.length-1)),function(n){return [_c('td',{staticClass:"leftLine topLine"}),_c('td',{staticClass:"rightLine topLine"})]}),_c('td',{staticClass:"leftLine"})],2),_c('tr',{staticClass:"nodes",class:{'hidden': !_vm.expanded}},_vm._l((_vm.datasource.children),function(child){return _c('td',{key:child.id,attrs:{"colspan":"2"}},[_c('node',{attrs:{"datasource":child,"expanded-list":_vm.expandedList,"handle-click":_vm.handleClick,"handle-expand":_vm.handleExpand},scopedSlots:_vm._u([_vm._l((Object.keys(_vm.$scopedSlots)),function(slot){return {key:slot,fn:function(scope){return [_vm._t(slot,null,null,scope)]}}})])})],1)}))]:_vm._e()],2)])
+var _obj;}
+var OrganizationChartNodevue_type_template_id_3e7a788e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/OrganizationChartNode.vue?vue&type=template&id=ae26f82a&
+// CONCATENATED MODULE: ./src/components/OrganizationChartNode.vue?vue&type=template&id=3e7a788e&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/OrganizationChartNode.vue?vue&type=script&lang=js&
+//
+//
 //
 //
 //
@@ -12071,7 +12074,7 @@ var OrganizationChartNodevue_type_template_id_ae26f82a_staticRenderFns = []
   name: 'node',
   props: {
     datasource: Object,
-    collapsedList: {
+    expandedList: {
       default: function _default() {
         return {};
       },
@@ -12080,7 +12083,11 @@ var OrganizationChartNodevue_type_template_id_ae26f82a_staticRenderFns = []
     handleExpand: Function,
     handleClick: Function
   },
-  methods: {}
+  computed: {
+    expanded: function expanded() {
+      return this.expandedList[this.datasource.Id + ''] || this.datasource.Level === 0;
+    }
+  }
 });
 // CONCATENATED MODULE: ./src/components/OrganizationChartNode.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_OrganizationChartNodevue_type_script_lang_js_ = (OrganizationChartNodevue_type_script_lang_js_); 
@@ -12193,8 +12200,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_OrganizationChartNodevue_type_script_lang_js_,
-  OrganizationChartNodevue_type_template_id_ae26f82a_render,
-  OrganizationChartNodevue_type_template_id_ae26f82a_staticRenderFns,
+  OrganizationChartNodevue_type_template_id_3e7a788e_render,
+  OrganizationChartNodevue_type_template_id_3e7a788e_staticRenderFns,
   false,
   null,
   null,
@@ -12207,6 +12214,8 @@ component.options.__file = "OrganizationChartNode.vue"
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/OrganizationChartContainer.vue?vue&type=script&lang=js&
 
 
+//
+//
 //
 //
 //
@@ -12262,8 +12271,8 @@ component.options.__file = "OrganizationChartNode.vue"
       panning: false,
       startX: 0,
       startY: 0,
-      collapsedList: {},
-      transformVal: ''
+      transformVal: '',
+      expandedList: {}
     };
   },
   components: {
@@ -12272,7 +12281,7 @@ component.options.__file = "OrganizationChartNode.vue"
   methods: {
     handleExpand: function handleExpand(nodeData) {
       this.$emit('node-expand', nodeData);
-      this.$set(this.collapsedList, nodeData.Id + '', !this.collapsedList[nodeData.Id + '']);
+      this.$set(this.expandedList, nodeData.Id + '', !this.expandedList[nodeData.Id + '']);
     },
     handleClick: function handleClick(nodeData) {
       this.$emit('node-click', nodeData);
@@ -12384,8 +12393,14 @@ component.options.__file = "OrganizationChartNode.vue"
     zoomHandler: function zoomHandler(e) {
       var newScale = 1 + (e.deltaY > 0 ? -0.2 : 0.2);
       this.setChartScale(newScale);
-    },
-    created: function created() {}
+    }
+  },
+  mounted: function mounted() {
+    var offset = (jquery_default()('.orgchart', this.$refs.main).width() - jquery_default()(this.$refs.main).width()) / 2;
+
+    if (offset > 0) {
+      jquery_default()(".orgchart-container").scrollLeft(offset);
+    }
   }
 });
 // CONCATENATED MODULE: ./src/components/OrganizationChartContainer.vue?vue&type=script&lang=js&
