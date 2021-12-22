@@ -1,16 +1,16 @@
 <template>
   <div v-bind="{ scopedSlots: $scopedSlots }"
-    class="orgchart-container"
-    @wheel="zoom && zoomHandler($event)"
-    @mouseup="pan && panning && panEndHandler($event)"
+       class="orgchart-container"
+       @wheel="zoom && zoomHandler($event)"
+       @mouseup="pan && panning && panEndHandler($event)"
   >
     <div
-      class="orgchart"
-      :style="{ transform: transformVal, cursor: cursorVal }"
-      @mousedown="pan && panStartHandler($event)"
-      @mousemove="pan && panning && panHandler($event)"
+        class="orgchart"
+        :style="{ transform: transformVal, cursor: cursorVal }"
+        @mousedown="pan && panStartHandler($event)"
+        @mousemove="pan && panning && panHandler($event)"
     >
-      <organization-chart-node :datasource="datasource" :handle-click="handleClick">
+      <organization-chart-node :datasource="datasource" :collapsed-list="collapsedList" :handle-click="handleClick" :handle-expand="handleExpand">
         <template v-for="slot in Object.keys($scopedSlots)" :slot="slot" slot-scope="scope">
           <slot :name="slot" v-bind="scope"/>
         </template>
@@ -49,12 +49,13 @@ export default {
       default: 7
     }
   },
-  data () {
+  data() {
     return {
       cursorVal: 'default',
       panning: false,
       startX: 0,
       startY: 0,
+      collapsedList: {},
       transformVal: ''
     }
   },
@@ -62,44 +63,48 @@ export default {
     OrganizationChartNode
   },
   methods: {
-    handleClick (nodeData) {
+    handleExpand(nodeData) {
+      this.$emit('node-expand', nodeData);
+      this.$set(this.collapsedList, nodeData.Id+'', !this.collapsedList[nodeData.Id+'']);
+    },
+    handleClick(nodeData) {
       this.$emit('node-click', nodeData);
     },
-    panEndHandler () {
+    panEndHandler() {
       this.panning = false
       this.cursorVal = 'default'
     },
-    panHandler (e) {
-        let newX = 0
-        let newY = 0
-        if (!e.targetTouches) { // pand on desktop
-          newX = e.pageX - this.startX
-          newY = e.pageY - this.startY
-        } else if (e.targetTouches.length === 1) { // pan on mobile device
-          newX = e.targetTouches[0].pageX - this.startX
-          newY = e.targetTouches[0].pageY - this.startY
-        } else if (e.targetTouches.length > 1) {
-          return;
-        }
-        if (this.transformVal === '') {
-          if (this.transformVal.indexOf('3d') === -1) {
-            this.transformVal = 'matrix(1,0,0,1,' + newX + ',' + newY + ')'
-          } else {
-            this.transformVal = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,' + newX + ', ' + newY + ',0,1)'
-          }
+    panHandler(e) {
+      let newX = 0
+      let newY = 0
+      if (!e.targetTouches) { // pand on desktop
+        newX = e.pageX - this.startX
+        newY = e.pageY - this.startY
+      } else if (e.targetTouches.length === 1) { // pan on mobile device
+        newX = e.targetTouches[0].pageX - this.startX
+        newY = e.targetTouches[0].pageY - this.startY
+      } else if (e.targetTouches.length > 1) {
+        return;
+      }
+      if (this.transformVal === '') {
+        if (this.transformVal.indexOf('3d') === -1) {
+          this.transformVal = 'matrix(1,0,0,1,' + newX + ',' + newY + ')'
         } else {
-          let matrix = this.transformVal.split(',')
-          if (this.transformVal.indexOf('3d') === -1) {
-            matrix[4] = newX
-            matrix[5] = newY + ')'
-          } else {
-            matrix[12] = newX
-            matrix[13] = newY
-          }
-          this.transformVal = matrix.join(',')
+          this.transformVal = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,' + newX + ', ' + newY + ',0,1)'
         }
+      } else {
+        let matrix = this.transformVal.split(',')
+        if (this.transformVal.indexOf('3d') === -1) {
+          matrix[4] = newX
+          matrix[5] = newY + ')'
+        } else {
+          matrix[12] = newX
+          matrix[13] = newY
+        }
+        this.transformVal = matrix.join(',')
+      }
     },
-    panStartHandler (e) {
+    panStartHandler(e) {
       if ($(e.target).closest('.node').length) {
         this.panning = false
         return
@@ -129,7 +134,7 @@ export default {
         return
       }
     },
-    setChartScale (newScale) {
+    setChartScale(newScale) {
       let matrix = ''
       let targetScale = 1
       if (this.transformVal === '') {
@@ -153,9 +158,11 @@ export default {
         }
       }
     },
-    zoomHandler (e) {
-      let newScale  = 1 + (e.deltaY > 0 ? -0.2 : 0.2)
+    zoomHandler(e) {
+      let newScale = 1 + (e.deltaY > 0 ? -0.2 : 0.2)
       this.setChartScale(newScale)
+    },
+    created: () => {
     }
   }
 };
@@ -172,6 +179,7 @@ export default {
   overflow: auto;
   text-align: center;
 }
+
 .orgchart {
   box-sizing: border-box;
   display: inline-block;
@@ -187,8 +195,8 @@ export default {
       90deg,
       rgba(200, 0, 0, 0.15) 10%,
       rgba(0, 0, 0, 0) 10%
-    ),
-    linear-gradient(rgba(200, 0, 0, 0.15) 10%, rgba(0, 0, 0, 0) 10%);
+  ),
+  linear-gradient(rgba(200, 0, 0, 0.15) 10%, rgba(0, 0, 0, 0) 10%);
   background-size: 10px 10px;
   border: 1px dashed rgba(0, 0, 0, 0);
   padding: 20px;
@@ -215,13 +223,16 @@ export default {
   padding-left: 18px;
   text-align: left;
 }
+
 .orgchart .verticalNodes ul:first-child {
   margin-top: 2px;
 }
+
 .orgchart .verticalNodes > td::before {
   content: "";
   border: 1px solid rgba(217, 83, 79, 0.8);
 }
+
 .orgchart .verticalNodes > td > ul > li:first-child::before {
   box-sizing: border-box;
   top: -4px;
@@ -229,9 +240,11 @@ export default {
   width: calc(50% - 2px);
   border-width: 2px 0 0 2px;
 }
+
 .orgchart .verticalNodes ul > li {
   position: relative;
 }
+
 .orgchart .verticalNodes ul > li::before,
 .orgchart .verticalNodes ul > li::after {
   box-sizing: border-box;
@@ -242,21 +255,25 @@ export default {
   border-style: solid;
   border-width: 0 0 2px 2px;
 }
+
 .orgchart .verticalNodes ul > li::before {
   top: -4px;
   height: 30px;
   width: 11px;
 }
+
 .orgchart .verticalNodes ul > li::after {
   top: 1px;
   height: 100%;
 }
+
 .orgchart .verticalNodes ul > li:first-child::after {
   box-sizing: border-box;
   top: 24px;
   width: 11px;
   border-width: 2px 0 0 2px;
 }
+
 .orgchart .verticalNodes ul > li:last-child::after {
   box-sizing: border-box;
   border-width: 2px 0 0;
